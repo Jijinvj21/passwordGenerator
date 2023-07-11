@@ -1,9 +1,6 @@
 import { collection, addDoc ,getFirestore,getDocs , deleteDoc ,doc} from "firebase/firestore"; 
-// import dotenv from 'dotenv'
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-import {getAuth , GoogleAuthProvider} from "firebase/auth"
-console.log(process.env.REACT_APP_APIKEY)
+import {getAuth , GoogleAuthProvider } from "firebase/auth"
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
@@ -22,4 +19,5 @@ const auth = getAuth(app)
 const provider = new GoogleAuthProvider()
 const db = getFirestore(app);
 
-export {auth,provider,db,collection,addDoc,getDocs,deleteDoc,doc }
+
+export {auth,provider,db,collection,addDoc,getDocs,deleteDoc,doc,  }

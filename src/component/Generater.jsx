@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import generatePassword from "../utilitie/passwordGenerator";
 import Copy from "../utilitie/coupClipBoard";
 import { auth, provider } from "../utilitie/firebaseApiConfiguration";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup ,signOut } from "firebase/auth";
 import { createDB } from "../utilitie/firebaseCreateCollection";
 import { toast } from "react-hot-toast";
 
@@ -15,7 +15,6 @@ function Generater() {
   const [uppercase, setUppercase] = useState(false);
   const [password, setPassword] = useState(null);
   const [Userlogin, setUserLogin] = useState("");
-
   const navigate = useNavigate();
   const email  = localStorage.getItem("Useremail")
  const submitNewSaveHandler = (e) => {
@@ -116,6 +115,7 @@ function Generater() {
   const handilLogin = () => {
     signInWithPopup(auth, provider)
       .then((data) => {
+        console.log(data)
         setUserLogin(data.user.email);
         localStorage.setItem("Useremail", data.user.email);
       })
@@ -131,6 +131,11 @@ function Generater() {
   }, []);
 
   const handilLogout = () => {
+    signOut(auth).then(() => {
+      toast.success( "Logout");
+    }).catch((error) => {
+      toast.success( "Error in logout");
+    });
     localStorage.clear();
     window.location.reload();
   };
